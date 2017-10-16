@@ -18,5 +18,10 @@ public class WeatherTests {
         assert (Double.valueOf(data.getData("Tallinn").getWind().toString()) < 33);
     }
 
+    @Test
+    public void usesRightCityTest() {
+        assert (data.getData("Tallinn").getName().equals("Tallinn"));
+    }
+
 
 }
