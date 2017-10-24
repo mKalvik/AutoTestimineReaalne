@@ -1,27 +1,42 @@
+import code.JsonReader;
 import com.google.gson.Gson;
-import main.Voidmain;
-import main.json.WeatherAPI;
+import com.google.gson.JsonObject;
+import data.WeatherData;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 
 public class WeatherTests {
-    private Voidmain data = new Voidmain();
+    private JsonReader data;
+    private WeatherData weatherdata;
 
 
-    @Test
-    public void mingipaskTest() {
-        assert (Double.valueOf(data.getData("Tallinn").getWind().toString()) < 33);
+    @Before
+    public void setUp() throws IOException {
+        data = new JsonReader();
+        weatherdata = new WeatherData();
     }
 
     @Test
-    public void usesRightCityTest() {
-        assert (data.getData("Tallinn").getName().equals("Tallinn"));
+    public void currentWindSpeedTest() {
+        assert (weatherdata.getCurrentWindSpeed() < 33);
     }
 
+    @Test
+    public void weatherUsesTallinnTest() {
+        assert (weatherdata.getCityName().equals("Tallinn"));
+    }
+
+    @Test
+    public void currentTemperatureTest() {
+//        assert (Double.valueOf(weatherdata.get("temp")) < 310);
+        assert (weatherdata.getCurrentTemp() < 310);
+    }
 
 }
+
