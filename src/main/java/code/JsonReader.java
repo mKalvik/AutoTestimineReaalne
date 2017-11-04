@@ -15,6 +15,13 @@ import com.google.gson.JsonParser;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class JsonReader {
 
@@ -45,9 +52,9 @@ public class JsonReader {
     public static void main(String[] args) throws IOException, ParseException {
         JsonReader reader = new JsonReader();
         JSONObject json = reader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/weather?q=Tallinn&appid=d60283b7466205ccc628d2a40029306c");
-//        JSONObject forecast = reader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/forecast?q=Tallinn&appid=d60283b7466205ccc628d2a40029306c");
+        JSONObject forecast = reader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/forecast?q=Tallinn&appid=d60283b7466205ccc628d2a40029306c");
 //        JSONObject s = (JSONObject) forecast.get("list");
-
+        JSONArray jarray = forecast.getJSONArray("list");
 //        System.out.println(s.get("main"));
 //        System.out.println(forecast.toString());
 //        System.out.println(forecast.get("list"));
@@ -56,10 +63,25 @@ public class JsonReader {
         JSONObject pask = (JSONObject) json.get("main");
         JSONObject sitt = (JSONObject) json.get("wind");
 
-        System.out.println(json.toString());
-        System.out.println(json.get("id"));
-        System.out.println(json.get("main"));
-        System.out.println(pask.get("temp"));
+//        System.out.println(json.toString());
+//        System.out.println(json.get("id"));
+//        System.out.println(json.get("main"));
+//        System.out.println(pask.get("temp"));
+        JSONObject kk = (JSONObject) jarray.get(0);
+        System.out.println(kk.get("main"));
+        System.out.println(jarray.get(0));
+        System.out.println(jarray.get(1));
+        System.out.println(jarray.get(2));
+        System.out.println(jarray);
+
+        List<String> list = new ArrayList<String>();
+        for (int i = 0; i < jarray.length(); i++){
+            list.add(jarray.getJSONObject(i).getString("dt_txt"));
+        }
+
+        System.out.println(LocalDate.now().plusDays(1).toString());
+        System.out.println(LocalDateTime.now());
+        System.out.println(list.get(0));
     }
 
 
