@@ -7,6 +7,18 @@
     <groupId>json</groupId>
     <artifactId>com.IAY0361</artifactId>
     <version>1.0</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
@@ -33,6 +45,7 @@
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
+
 
     </dependencies>
 

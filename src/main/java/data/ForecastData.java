@@ -30,20 +30,6 @@ public class ForecastData {
         secondDay = LocalDate.now().plusDays(1).toString();
         thirdDay = LocalDate.now().plusDays(2).toString();
         jsonArray = data.getJSONArray("list");
-//        for(int index = 0; index < jsonArray.length(); index++) {
-//            datesList.add(jsonArray.getJSONObject(index).getString("dt_text"));
-//        }
-//
-//        for (String date : datesList) {
-//            if (date.contains(firstDay)) {
-//                firstDayForecast.add(jsonArray.getJSONObject());
-//            }
-//        }
-//        for (int index = 0; index < datesList.size(); index++) {
-//            if (datesList.get(index).contains(firstDay)) {
-//                firstDayForecast.add(jsonArray.getJSONObject())
-//            }
-//        }
     }
 
     public void generateListWithAllDates() {
@@ -73,28 +59,23 @@ public class ForecastData {
     public List<JSONObject> getFirstDayForecast() {
         return firstDayForecast;
     }
-
     public List<JSONObject> getSecondDayForecast() {
         return secondDayForecast;
     }
-
     public List<JSONObject> getThirdDayForecast() {
         return thirdDayForecast;
     }
 
 
-    public Double getFirstDayMinimumTemp() {
+    public double getFirstDayMinimumTemp() {
         return getMinTemperature(firstDayForecast);
     }
-
-    public Double getSecondDayMinimumTemp() {
+    public double getSecondDayMinimumTemp() {
         return getMinTemperature(secondDayForecast);
     }
-
-    public Double getThirdDayMinimumTemp() {
+    public double getThirdDayMinimumTemp() {
         return getMinTemperature(thirdDayForecast);
     }
-
     public double getFirstDayMaximumTemp() {
         return getMaxTemperature(firstDayForecast);
     }
@@ -105,29 +86,33 @@ public class ForecastData {
         return getMaxTemperature(thirdDayForecast);
     }
 
-    public Double getMaxTemperature(List<JSONObject> jsonObjects) {
-        Double maxValue = Double.MIN_VALUE;
+    public double getMaxTemperature(List<JSONObject> jsonObjects) {
+        double maxValue = Double.MIN_VALUE;
 
         for (JSONObject o : jsonObjects) {
-            JSONObject object = (JSONObject) o.get("main");
-            Double objectTemporary = Double.valueOf(object.get("temp").toString());
+            double objectTemporary = o.getJSONObject("main").getDouble("temp");
             if (objectTemporary > maxValue) {
                 maxValue = objectTemporary;
             }
         }
         return maxValue;
     }
-    public Double getMinTemperature(List<JSONObject> jsonObjects) {
-        Double maxValue = Double.MAX_VALUE;
+    public double getMinTemperature(List<JSONObject> jsonObjects) {
+        double maxValue = Double.MAX_VALUE;
 
         for (JSONObject o : jsonObjects) {
-            JSONObject object = (JSONObject) o.get("main");
-            Double objectTemp = Double.valueOf(object.get("temp").toString());
+            double objectTemp = o.getJSONObject("main").getDouble("temp");
             if (objectTemp < maxValue) {
                 maxValue = objectTemp;
             }
         }
         return maxValue;
+    }
+
+
+    public String stringToWriteToFile() {
+        return String.format("Kogu esimese päeva minTemp: %.2f, maxTemp: %.2f. Kogu teise päeva minTemp: %.2f, maxTemp: %.2f. Kogu kolmanda päeva minTemp: %.2f, maxTemp: %.2f",
+                getFirstDayMinimumTemp(), getFirstDayMaximumTemp(), getSecondDayMinimumTemp(), getSecondDayMaximumTemp(), getThirdDayMinimumTemp(), getThirdDayMaximumTemp());
     }
 
 

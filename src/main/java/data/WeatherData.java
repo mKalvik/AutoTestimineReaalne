@@ -17,16 +17,18 @@ public class WeatherData {
     }
 
     public String getCityName() {
-        return data.get("name").toString();
+        return data.getString("name");
     }
 
     public Double getCurrentTemp() {
-        JSONObject mainData = (JSONObject) data.get("main");
-        return Double.valueOf(mainData.get("temp").toString());
+        return data.getJSONObject("main").getDouble("temp");
     }
 
     public Double getCurrentWindSpeed() {
-        JSONObject windData = (JSONObject) data.get("wind");
-        return Double.valueOf(windData.get("speed").toString());
+        return data.getJSONObject("main").getDouble("speed");
+    }
+
+    public String writeToFileForWeather() {
+        return String.format("Current weather temp: %.2f", getCurrentTemp());
     }
 }
