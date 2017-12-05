@@ -19,7 +19,7 @@ public class WeatherTests {
     @Before
     public void setUp() throws IOException {
         data = new JsonReader();
-        weatherdata = new WeatherData();
+        weatherdata = new WeatherData("Tallinn");
     }
 
     @Test

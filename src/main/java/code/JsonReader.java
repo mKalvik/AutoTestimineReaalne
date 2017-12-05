@@ -56,14 +56,22 @@ public class JsonReader {
     public static void main(String[] args) throws IOException, ParseException {
 
         JsonReader reader = new JsonReader();
-        WeatherData weatherData = new WeatherData();
-        ForecastData forecastData = new ForecastData(reader);
+        WeatherData weatherData = new WeatherData("Tallinn");
+        ForecastData forecastData = new ForecastData(reader, "Tallinn");
         Controller controller = new Controller();
-        forecastData.generateListWithAllDates();
-        forecastData.generateThreeDayForecast();
-        System.out.println(forecastData.stringToWriteToFile() + weatherData.writeToFileForWeather());
-        String str = forecastData.stringToWriteToFile() + " " + weatherData.writeToFileForWeather();
-
+        InfoController infoController = new InfoController(reader, weatherData, forecastData, controller);
+        controller.printToOutputFile(infoController.whatToWrite());
+//        System.out.println(infoController.whatToWrite());
+//        forecastData.generateListWithAllDates();
+//        forecastData.generateThreeDayForecast();
+//        System.out.println(forecastData.getFirstDayForecast());
+//        System.out.println(forecastData.getSecondDayForecast());
+//        System.out.println(forecastData.getThirdDayMaximumTemp());
+//        System.out.println(forecastData.getSecondDayMaximumTemp());
+//        System.out.println(forecastData.stringToWriteToFile() + weatherData.writeToFileForWeather());
+//        String str = forecastData.stringToWriteToFile() + " " + weatherData.writeToFileForWeather();
+//        controller.readFromFile();
+//        System.out.println(controller.getCityNamesList());
     }
 
 
