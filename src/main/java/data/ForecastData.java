@@ -40,6 +40,10 @@ public class ForecastData {
         }
     }
 
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
     public List<String> getDatesList() {
         return datesList;
     }

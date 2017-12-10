@@ -25,7 +25,7 @@ public class JsonTests {
     @Test
     public void checkConnectionCode() throws IOException {
         HttpUtility utility = new HttpUtility();
-        assert (utility.getConnectionResponseCode(url) == 200);
+        assert (utility.getWeatherConnectionResponseCode("Tallinn") == 200);
     }
 
     @Test
