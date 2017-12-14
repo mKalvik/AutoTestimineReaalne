@@ -22,14 +22,16 @@ public class InfoController {
     }
 
 
-    public String whatToWrite() throws IOException {
-        String stringToPrint = "";
+    public void whatToWrite() throws IOException {
+
         for (String cityName : controller.getCityNamesList()) {
+            String stringToPrint = "";
             forecastData = new ForecastData(reader, cityName);
             weatherData = new WeatherData(cityName);
             forecastData.generateThreeDayForecast();
-            stringToPrint += forecastData.stringToWriteToFile() + " " + weatherData.writeToFileForWeather() + "\n";
+            stringToPrint += weatherData.writeToFileForWeather() + " " + forecastData.stringToWriteToFile();
+            controller.printToOutputFile(stringToPrint, cityName + ".txt");
+            System.out.println("peaks kirjutatud olema");
         }
-        return stringToPrint;
     }
 }

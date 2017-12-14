@@ -40,10 +40,6 @@ public class ForecastData {
         }
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
     public List<String> getDatesList() {
         return datesList;
     }
@@ -99,6 +95,7 @@ public class ForecastData {
         return getMaxTemperature(thirdDayForecast);
     }
 
+
     public double getMaxTemperature(List<JSONObject> jsonObjects) {
         double maxValue = -1000.00;
 
@@ -124,7 +121,7 @@ public class ForecastData {
 
 
     public String stringToWriteToFile() {
-        return String.format(getCityName()+" Kogu esimese päeva minTemp: %.2f, maxTemp: %.2f. Kogu teise päeva minTemp: %.2f, maxTemp: %.2f. Kogu kolmanda päeva minTemp: %.2f, maxTemp: %.2f",
+        return String.format("Kogu esimene päev:\nminTemp: %.2f, \nmaxTemp: %.2f. \nKogu teine päev: \nminTemp: %.2f, \nmaxTemp: %.2f. \nKogu kolmas päev: \nminTemp: %.2f, \nmaxTemp: %.2f",
                 getFirstDayMinimumTemp(), getFirstDayMaximumTemp(), getSecondDayMinimumTemp(), getSecondDayMaximumTemp(), getThirdDayMinimumTemp(), getThirdDayMaximumTemp());
     }
 

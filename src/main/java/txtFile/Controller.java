@@ -1,6 +1,8 @@
 package txtFile;
 
 
+import code.InfoController;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,11 +13,13 @@ import java.util.List;
 public class Controller {
 
     private List<String> cityNames = new ArrayList<>();
+    private String inputFilePath;
 
-    public Controller(){}
+    public Controller(){
+    }
 
-    public void printToOutputFile(String stringToWrite) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt",true))) {
+    public void printToOutputFile(String stringToWrite, String outputFileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName,true))) {
             writer.write(stringToWrite+"\n");
         } catch (IOException e) {
             System.out.println("Error writing file:" + e.getMessage());
@@ -24,6 +28,7 @@ public class Controller {
     }
 
     public void readFromFile() {
+
         Path path = Paths.get("input.txt");
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             while (true) {

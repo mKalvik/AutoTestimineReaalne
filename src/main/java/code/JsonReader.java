@@ -60,7 +60,15 @@ public class JsonReader {
         ForecastData forecastData = new ForecastData(reader, "Tallinn");
         Controller controller = new Controller();
         InfoController infoController = new InfoController(reader, weatherData, forecastData, controller);
-        controller.printToOutputFile(infoController.whatToWrite());
+        JSONObject jobjekt = reader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/weather?q=Tallinn&appid=d60283b7466205ccc628d2a40029306c");
+        JSONObject jobjekt2 = reader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/forecast?q=Tallinn&appid=d60283b7466205ccc628d2a40029306c");
+//        JSONArray jarary = jobjekt.getJSONArray("list");
+
+//        System.out.println(jobjekt2);
+//        System.out.println(jobjekt.getJSONObject("coord").getDouble("lon"));
+//        System.out.println(jobjekt.getJSONObject("coord").getDouble("lat"));
+        infoController.whatToWrite();
+//        weatherData.getCurrentCityCoordinates();
 //        System.out.println(infoController.whatToWrite());
 //        forecastData.generateListWithAllDates();
 //        forecastData.generateThreeDayForecast();

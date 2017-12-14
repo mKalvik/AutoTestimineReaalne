@@ -28,7 +28,15 @@ public class WeatherData {
         return data.getJSONObject("main").getDouble("speed");
     }
 
+    public double getCurrentCityLatitude() {
+        return data.getJSONObject("coord").getDouble("lat");
+    }
+
+    public double getCurrentCityLongitude() {
+        return data.getJSONObject("coord").getDouble("lon");
+    }
+
     public String writeToFileForWeather() {
-        return String.format("Current weather temp: %.2f", getCurrentTemp());
+        return String.format("Current city: %s\nCity lon/lat: %.2f/%.2f.\nCurrent temp: %.2f", getCityName(), getCurrentCityLongitude(), getCurrentCityLatitude(), getCurrentTemp());
     }
 }
