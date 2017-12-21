@@ -12,14 +12,14 @@ import org.junit.Test;
 import java.io.IOException;
 
 public class WeatherTests {
-    private JsonReader data;
+    private JsonReader reader;
     private WeatherData weatherdata;
 
 
     @Before
     public void setUp() throws IOException {
-        data = new JsonReader();
-        weatherdata = new WeatherData("Tallinn");
+        reader = new JsonReader();
+        weatherdata = new WeatherData("Tallinn", reader);
     }
 
     @Test
@@ -33,9 +33,23 @@ public class WeatherTests {
     }
 
     @Test
-    public void currentTemperatureTest() {
-//        assert (Double.valueOf(weatherdata.get("temp")) < 310);
+    public void currentTempNotTooHigh() {
         assert (weatherdata.getCurrentTemp() < 310);
+    }
+
+    @Test
+    public void currentTempNotTooLow() {
+        assert (weatherdata.getCurrentTemp() > 230);
+    }
+
+    @Test
+    public void cityHasCorrectLon() {
+        assert (weatherdata.getCurrentCityLongitude() == 24.75);
+    }
+
+    @Test
+    public void cityHasCorrectLat() {
+        assert (weatherdata.getCurrentCityLatitude() == 59.44);
     }
 
 }

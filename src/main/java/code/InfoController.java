@@ -27,7 +27,7 @@ public class InfoController {
         for (String cityName : controller.getCityNamesList()) {
             String stringToPrint = "";
             forecastData = new ForecastData(reader, cityName);
-            weatherData = new WeatherData(cityName);
+            weatherData = new WeatherData(cityName, reader);
             forecastData.generateThreeDayForecast();
             stringToPrint += weatherData.writeToFileForWeather() + " " + forecastData.stringToWriteToFile();
             controller.printToOutputFile(stringToPrint, cityName + ".txt");

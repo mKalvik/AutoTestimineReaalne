@@ -15,12 +15,12 @@ public class Controller {
     private List<String> cityNames = new ArrayList<>();
     private String inputFilePath;
 
-    public Controller(){
+    public Controller() {
     }
 
     public void printToOutputFile(String stringToWrite, String outputFileName) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName,true))) {
-            writer.write(stringToWrite+"\n");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName, true))) {
+            writer.write(stringToWrite + "\n");
         } catch (IOException e) {
             System.out.println("Error writing file:" + e.getMessage());
             e.printStackTrace();

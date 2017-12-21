@@ -12,6 +12,7 @@ public class ForecastTests {
 
     private ForecastData forecastData;
     private JsonReader reader;
+
     @Before
     public void setUp() throws IOException {
         reader = new JsonReader();

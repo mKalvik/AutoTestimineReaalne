@@ -27,17 +27,21 @@ public class ForecastData {
     public ForecastData(JsonReader reader, String cityName) throws IOException {
         this.reader = reader;
         this.cityName = cityName;
-        data = reader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/forecast?q="+cityName+"&appid=d60283b7466205ccc628d2a40029306c");
+        data = reader.readJsonFromUrl("http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=d60283b7466205ccc628d2a40029306c");
         firstDay = LocalDate.now().toString();
         secondDay = LocalDate.now().plusDays(1).toString();
         thirdDay = LocalDate.now().plusDays(2).toString();
         jsonArray = data.getJSONArray("list");
     }
 
-    private void generateListWithAllDates() {
+    public void generateListWithAllDates() {
         for (int index = 0; index < jsonArray.length(); index++) {
             datesList.add(jsonArray.getJSONObject(index).getString("dt_txt"));
         }
+    }
+
+    public JSONObject getData() {
+        return data;
     }
 
     public List<String> getDatesList() {
@@ -68,9 +72,11 @@ public class ForecastData {
     public List<JSONObject> getFirstDayForecast() {
         return firstDayForecast;
     }
+
     public List<JSONObject> getSecondDayForecast() {
         return secondDayForecast;
     }
+
     public List<JSONObject> getThirdDayForecast() {
         return thirdDayForecast;
     }
@@ -79,18 +85,23 @@ public class ForecastData {
     public double getFirstDayMinimumTemp() {
         return getMinTemperature(firstDayForecast);
     }
+
     public double getSecondDayMinimumTemp() {
         return getMinTemperature(secondDayForecast);
     }
+
     public double getThirdDayMinimumTemp() {
         return getMinTemperature(thirdDayForecast);
     }
+
     public double getFirstDayMaximumTemp() {
         return getMaxTemperature(firstDayForecast);
     }
+
     public double getSecondDayMaximumTemp() {
         return getMaxTemperature(secondDayForecast);
     }
+
     public double getThirdDayMaximumTemp() {
         return getMaxTemperature(thirdDayForecast);
     }
@@ -107,6 +118,7 @@ public class ForecastData {
         }
         return maxValue;
     }
+
     public double getMinTemperature(List<JSONObject> jsonObjects) {
         double maxValue = 1000.00;
 
